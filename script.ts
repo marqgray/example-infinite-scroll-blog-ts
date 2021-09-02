@@ -9,6 +9,15 @@ const app = new (class {
 
   constructor() {
     this.showPosts();
+
+    window.addEventListener("scroll", () => {
+      const { scrollTop, scrollHeight, clientHeight } =
+        document.documentElement;
+      [];
+      if (scrollTop + clientHeight >= scrollHeight - 5) {
+        this.showLoading();
+      }
+    });
   }
 
   async getPosts(): Promise<JsonPlaceholderPostList> {
@@ -34,5 +43,16 @@ const app = new (class {
             `;
       this.htmlElements.postsContainer.appendChild(postElement);
     });
+  }
+
+  showLoading() {
+    this.htmlElements.loading.classList.add("show");
+    setTimeout(() => {
+      this.htmlElements.loading.classList.remove("show");
+      setTimeout(() => {
+        this.page++;
+        this.showPosts();
+      }, 300);
+    }, 1000);
   }
 })();
