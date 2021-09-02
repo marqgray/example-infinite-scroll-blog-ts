@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "module": "none",
+    "target": "es5",
+    "sourceMap": true,
+    "lib": [
+      "ES2015",
+      "dom"
+    ],
+    "typeRoots": [
+      "defs/jsonplaceholder-posts.d.ts"
+    ]
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}
