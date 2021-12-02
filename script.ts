@@ -13,9 +13,30 @@ const app = new (class {
     window.addEventListener("scroll", () => {
       const { scrollTop, scrollHeight, clientHeight } =
         document.documentElement;
-      [];
       if (scrollTop + clientHeight >= scrollHeight - 5) {
         this.showLoading();
+      }
+    });
+
+    this.htmlElements.filter.addEventListener("input", this.filterPosts);
+  }
+
+  filterPosts(e) {
+    const term = e.target.value.toUpperCase();
+    const posts = document.querySelectorAll(".post");
+
+    posts.forEach((post: HTMLElement) => {
+      const title = (<HTMLElement>(
+        post.querySelector(".post-title")
+      )).innerText.toUpperCase();
+      const body = (<HTMLElement>(
+        post.querySelector(".post-body")
+      )).innerText.toUpperCase();
+
+      if (title.indexOf(term) > -1 || body.indexOf(term) > -1) {
+        post.style.display = "flex";
+      } else {
+        post.style.display = "none";
       }
     });
   }
